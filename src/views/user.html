@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="/css/main.css">
+   <title>User</title>
+</head>
+
+<body>
+   <div class="rowuser container">
+      <h1 id="nameuser"></h1>
+      <h2 id="obshiyBal">0</h2>
+   </div>
+
+   <div class="table1 container" style="margin-top: 40px;">
+      <div class="table1-header">
+         <div href="#" class="row">
+            <h4>No</h4>
+            <h4>FIO</h4>
+            <h4>Ball</h4>
+            <h4>Sana</h4>
+            <p>Izoh</p>
+         </div>
+      </div>
+      <div class="table1-body">
+
+      </div>
+   </div>
+
+   <script>
+      (async () => {
+         
+         let tabele = document.querySelector('.table1-body')
+         let response = await fetch('/user/natija')
+         let res = await response.json()
+         console.log(res.sana);
+         let obshiy = 0
+
+         for (let i = 0; i < res.length; i++) {
+            let row = document.createElement('div') 
+            row.setAttribute('class', 'row')
+             let num = document.createElement('h4')
+              num.textContent = i + 1
+            let nam = document.createElement('h4')
+            nam.textContent = res[i].userName 
+            nam.setAttribute('class', 'userName') 
+            let ball = document.createElement('h4')
+            let izoh = document.createElement('p')
+            izoh.textContent = res[i].izoh
+            let sana = document.createElement('h4')
+            sana.textContent = res[i].sana
+            ball.textContent = res[i].userBall 
+            row.appendChild(num) 
+            row.appendChild(nam) 
+            row.appendChild(ball)
+            row.appendChild(sana)
+            row.appendChild(izoh)
+            tabele.append(row)
+            obshiy = obshiy + +res[i].userBall
+            nameuser.textContent = res[i].userName
+         }
+
+      obshiyBal.textContent = obshiy
+        
+      })()
+   </script>
+</body>
+
+</html>

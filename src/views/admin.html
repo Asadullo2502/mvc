@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="/css/main.css">
+   <title>Admin</title>
+</head>
+
+<body>
+
+
+   <div class="adminModal">
+      <span id="ex"></span>
+      <form action="/admin/add" method="POST" enctype="application/x-www-form-urlencoded">
+         <div class="row">
+            <label for="ball">Ball</label>
+            <input type="text" name="userBall" id="ball">
+         </div>
+         <div class="row">
+            <label for="sana">Sana</label>
+            <input type="date" name="sana" id="sana">
+         </div>
+         <div class="row">
+            <label>Izoh</label>
+            <textarea name="izoh" id="izoh" cols="30" rows="10"></textarea>
+         </div>
+         <div class="nameInput">
+            <input type="text" id="name" name="userName">
+         </div>
+         <button type="submit">Send</button>
+      </form>
+   </div>
+
+   <div class="header container">
+      <form action="/admin/userplus" method="POST" enctype="application/x-www-form-urlencoded">
+         <input type="text" name="userName">
+         <button type="submit">Add</button>
+      </form>
+   </div>
+
+   <div class="table container">
+      <div class="table-header">
+         <div href="#" class="row">
+            <h4>No</h4>
+            <h4>FIO</h4>
+            <h4>Ball</h4>
+         </div>
+      </div>
+      <div class="table-body">
+
+      </div>
+   </div>
+
+   <script>
+      let tabele = document.querySelector('.table-body');
+
+
+      (async () => {
+         let response = await fetch('/admin/api')
+         let res = await response.json()
+         console.log(res);
+
+         for (let i = 0; i < res.length; i++) {
+            let row = document.createElement('div')
+            row.setAttribute('class', 'row')
+            let num = document.createElement('h4')
+            num.textContent = i + 1
+            let nam = document.createElement('h4')
+            nam.textContent = res[i].userName
+            nam.setAttribute('class', 'userName')
+            let ball = document.createElement('h4')
+            ball.textContent = res[i].userBall
+            row.appendChild(num)
+            row.appendChild(nam)
+            row.appendChild(ball)
+            tabele.append(row)
+         }
+         let adminModal = document.querySelector('.adminModal')
+         let adminButton = document.querySelectorAll('.userName')
+         let ex = document.querySelector('#ex')
+         let nameIpt = document.querySelector('#name')
+
+         adminButton.forEach(element => {
+            element.addEventListener('dblclick', (e) => {
+               e.preventDefault()
+               adminModal.classList.add('active')
+               nameIpt.value = element.textContent
+            })
+
+            
+         })
+         ex.addEventListener('click', () => {
+            adminModal.classList.remove('active')
+         })
+      })()
+   </script>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "userId": 1,
+        "userName": "Asadulloh",
+        "userBall": "45",
+        "date": "2021-06-25",
+        "izoh": "Malades"
+    },
+    {
+        "id": 2,
+        "userId": 2,
+        "userName": "Xayrullo",
+        "userBall": "25",
+        "date": "2021-05-26",
+        "izoh": "Zor"
+    }
+]
